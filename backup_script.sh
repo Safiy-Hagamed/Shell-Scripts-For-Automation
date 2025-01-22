@@ -1,5 +1,12 @@
 #!/bin/bash
 
+################################
+#Author : Safiy 
+#Date : 12-01-2025
+#This is a Automated script for backing up a specified file 
+################################
+
+
 # Variables
 folder_to_backup='/home/lyla/devops/'
 backuplocation='/home/lyla/devops/'
