@@ -11,9 +11,10 @@
 # variable configuration
 partition="/home" #change the /home to the desired partition of your device
 max_limit=80
-log_location="/path/to/logs"
+log_location="/home/"
 log_file="$log_location/disk_utilization_alert.log"
 date_string=$(date +%d-%m-%Y--%H:%M)
+email_id=example@mail.com
 
 # function to ensure log folder and file exist
 ensure_log_setup() {
@@ -33,7 +34,7 @@ check_disk_usage() {
     if [ "$current_usage" -ge "$max_limit" ]; then
         ensure_log_setup
         echo " ${date_string} disk usage on $partition has exceeded ${max_limit}%. current usage: ${current_usage}%" \
-            | tee -a "$log_file"
+            | tee -a "$log_file" && echo "Instance Disk Usage Exceeded its limit" | mail -s "Disk Usage Alert!!" -A "$log_file" "$email_id"
     else
 	echo "${date_string} no action required" | tee -a "$log_file"
     fi
